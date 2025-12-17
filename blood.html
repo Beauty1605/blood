@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blood Donation Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f2f2f2;
+      line-height: 1.6;
+    }
+    header {
+      background: url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b') center/cover no-repeat;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    header h1 { font-size: 50px; }
+    header p { font-size: 22px; }
+
+    nav {
+      background: #800000;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+    }
+    nav a {
+      color: white;
+      margin: 0 20px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 80px 10%;
+      background: white;
+      margin: 40px 0;
+    }
+    section:nth-child(even) { background: #f9f9f9; }
+
+    h2 {
+      color: #b30000;
+      font-size: 36px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    p { font-size: 18px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+    }
+    form input, form select, form button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      background: #b30000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    button:hover { background: #800000; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    th { background: #b30000; color: white; }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #b30000;
+      color: white;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Blood Donation Management System</h1>
+  <p>Donate Blood • Save Lives • Be a Hero</p>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#importance">Why Donate</a>
+  <a href="#register">Register</a>
+  <a href="#search">Search</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+  <h2>About Our Mission</h2>
+  <p>
+    Blood donation is a noble and life-saving act that plays a crucial role in healthcare. It helps patients suffering from accidents, surgeries, cancer, blood disorders, and emergencies where timely blood availability can mean the difference between life and death. A single unit of donated blood can save multiple lives, making every donor a real-life hero.
+
+A blood donation management system further strengthens this process by connecting donors with those in need quickly and efficiently. By encouraging voluntary blood donation and spreading awareness, we can build a healthier, more responsible society. Donate blood, save lives, and be a reason for someone’s tomorrow. ❤️
+  </p>
+</section>
+
+<section id="importance">
+  <h2>Why Blood Donation Is Important</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4" />
+      <h3>Saves Lives</h3>
+      <p>One donation can save up to three lives.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa" />
+      <h3>Emergency Help</h3>
+      <p>Immediate blood availability during accidents.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67" />
+      <h3>Community Support</h3>
+      <p>Creates a strong and responsible society.</p>
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <h2>Donor Registration</h2>
+  <form id="donorForm">
+    <input type="text" id="name" placeholder="Donor Name" required />
+    <input type="number" id="age" placeholder="Age" required />
+    <select id="bloodGroup" required>
+      <option value="">Select Blood Group</option>
+      <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+      <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+    </select>
+    <input type="text" id="city" placeholder="City" required />
+    <input type="tel" id="mobile" placeholder="Mobile Number" required />
+    <button type="submit">Register as Donor</button>
+  </form>
+</section>
+
+<section id="search">
+  <h2>Search Blood Donors</h2>
+  <select id="searchGroup" onchange="searchDonor()">
+    <option value="">Select Blood Group</option>
+    <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+    <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+  </select>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Age</th><th>Blood Group</th><th>City</th><th>Mobile</th></tr>
+    </thead>
+    <tbody id="donorTable"></tbody>
+  </table>
+</section>
+
+<section id="gallery">
+  <h2>Blood Donation Gallery</h2>
+  <div class="grid">
+    <div class="card"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b"></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4"></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67"></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa"></div>
+  </div>
+</section>
+
+<section id="leaders">
+  <h2>People Who Make Blood Donation Possible</h2>
+  <p style="text-align:center">Dedicated individuals and organizations who responsibly manage, motivate, and save lives.</p>
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464" />
+      <h3>Doctors & Nurses</h3>
+      <p>They ensure safe blood collection, testing, and transfusion with strict medical standards.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb" />
+      <h3>Blood Bank Officers</h3>
+      <p>Responsible for storage, screening, and timely supply of blood to hospitals.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38" />
+      <h3>Volunteers</h3>
+      <p>They organize donation camps, spread awareness, and motivate donors.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41" />
+      <h3>NGOs & Social Leaders</h3>
+      <p>Lead initiatives, partnerships, and community programs to increase donations.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>Email: blooddonation@gmail.com</p>
+  <p>Phone: +91 98765 43210</p>
+</section>
+
+<footer>
+  <p>© 2025 Blood Donation Management System | Donate Blood, Save Life</p>
+</footer>
+
+<script>
+  let donors = [];
+  document.getElementById("donorForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const donor = {
+      name: name.value, age: age.value, bloodGroup: bloodGroup.value,
+      city: city.value, mobile: mobile.value
+    };
+    donors.push(donor);
+    alert("Donor Registered Successfully!");
+    this.reset();
+  });
+  function searchDonor() {
+    const group = searchGroup.value;
+    donorTable.innerHTML = "";
+    donors.filter(d => d.bloodGroup === group).forEach(d => {
+      donorTable.innerHTML += `<tr><td>${d.name}</td><td>${d.age}</td><td>${d.bloodGroup}</td><td>${d.city}</td><td>${d.mobile}</td></tr>`;
+    });
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
